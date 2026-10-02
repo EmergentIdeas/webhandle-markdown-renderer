@@ -65,3 +65,15 @@ or
 ```md
 ![[::my-boilerplate-tripartite]]
 ```
+
+## Example Code for Serving MD Files like Pages
+
+```js
+// Add what is essentially a page handler which renders things out of the docs directory.
+webhandle.routers.primary.get(['/docs', '/docs/:page'], async (req, res, next) => {
+	await webhandle.pageServer.setupDataForPages(req, res)
+	let page = req.params.page || 'index.md'
+	let content = await webhandle.render(page, res.locals)
+	res.end(content)
+})
+```
