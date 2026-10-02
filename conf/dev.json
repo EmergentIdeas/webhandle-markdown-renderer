@@ -1,0 +1,13 @@
+{
+	"port": 3000,
+	"development": true,
+	"initialAdministratorPassword": "dijm1bk498a0pvfl",
+	"@webhandle/session-cookie": {
+		"identity": {
+			"publicKeyBase64": "8BCW9okjLN7SBwQRYGDU3Itw_EZJruqw2rtFw2Orlkk",
+			"privateKeyPKCS8Base64": "MC4CAQAwBQYDK2VwBCIEIK6hKtJ0hwr3NH-ASrb0hYQnfl2AI_FebDFq9zymdPyZ",
+			"symmetricKeyBase64": "VHNspDJdOzRWlbPi9BF9n_38btKZbw1OljjEsJw6X_g",
+			"nickname": "RNAe4Ub3r3C_QxIgoHomh4EUdmgxZDt7tAicZ-e2aHk"
+		}
+	}
+}
