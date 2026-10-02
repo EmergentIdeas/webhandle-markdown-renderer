@@ -51,6 +51,20 @@ or
 let content = await webhandle.render('my-document.md')
 ```
 
+or
+
+```js
+let markdownRenderManager = webhandle.componentManagers('@webhandle/markdown-renderer').renderTemplate('/path/to/file', data, callback)
+```
+where `callback` is a function with signature `function(err, content)`. Note, the first arg is expected to be an absolute path.
+
+or, if you have markdown content which is not saved as a template
+```js
+let markdownRenderManager = webhandle.componentManagers('@webhandle/markdown-renderer').renderTemplateContent(markdownText, data, callback)
+```
+where `callback` is a function with signature `function(err, content)`. Note, the first arg is expected to be an absolute path.
+
+
 
 ## Including Another Template in a Markdown Template
 

@@ -38,7 +38,7 @@ initializeWebhandleComponent.setup = async function(webhandle, config) {
 	let templateRegExpression = /\!\[\[(.*?)\]\]/
 
 	// create a render engine in Express
-	webhandle.app.engine('md', async (filePath, options, callback) => {
+	manager.renderTemplate = async function(filePath, options, callback) {
 		// do a security check to make sure we're at least loading a file inside the project
 		filePath = path.resolve(filePath)
 		if (!filePath.startsWith(webhandle.projectRoot)) {
@@ -58,16 +58,18 @@ initializeWebhandleComponent.setup = async function(webhandle, config) {
 			return
 		}
 		
+		manager.renderTemplateContent(markdown, options, callback)
+	}
+	
+	manager.renderTemplateContent = async function(markdown, options, callback) {
 		// We're used the highlight code transform, so we'll need to include the stylesheet to format it.
 		// Potentially this could be change to reference a local version of this file
 		if(options && options.externalResourceManager) {
 			manager.addExternalResources(options.externalResourceManager)
 		}
-
-
+		
 		let parts = []
-		
-		
+
 		// tokenize the markdown into segments which are normal markdown and segments we should interpret
 		// as templates. The designator for a template is `![[]]`. This is not standard markdown but is used
 		// by obsidian to indicate that another document should be embedded.
@@ -129,8 +131,8 @@ initializeWebhandleComponent.setup = async function(webhandle, config) {
 		}
 
 		callback(null, result)
-	})
-
+	}
+	webhandle.app.engine('md', manager.renderTemplate)
 	
 	manager.addExternalResources = (externalResourceManager, options) => {
 		externalResourceManager.includeResource({
